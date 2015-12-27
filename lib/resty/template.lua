@@ -32,6 +32,7 @@ function _M.parse(self, tmpl, minify)
 end
 
 function _M.compile(self, tmpl, minify)
+    local key = nil == ngx and tmpl or ngx.md5(tmpl)
     self.cache[tmpl] = self.cache[tmpl] or loadstring(_M.parse(self, tmpl, minify))()
     return self.cache[tmpl]
 end
