@@ -1,7 +1,7 @@
 local template = require "lib.resty.template"
 
-local t = template.new(io.write, true, {"{{", "}}", "{%", "%}"})
---local t = template.new()
+local t = template.new()
+local t = template.new(io.write, true, {"{{", "}}", "{%%", "%%}"})
 
 local tmpl = [[
 <h1>{{title}}</h1>]]
