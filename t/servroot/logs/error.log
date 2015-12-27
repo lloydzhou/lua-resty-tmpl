@@ -1,0 +1,8 @@
+2015/12/27 20:13:00 [notice] 18039#0: using the "epoll" event method
+2015/12/27 20:13:00 [notice] 18039#0: openresty/1.7.10.2
+2015/12/27 20:13:00 [notice] 18039#0: built by gcc 4.8.2 (Ubuntu 4.8.2-19ubuntu1) 
+2015/12/27 20:13:00 [notice] 18039#0: OS: Linux 3.13.0-48-generic
+2015/12/27 20:13:00 [notice] 18039#0: getrlimit(RLIMIT_NOFILE): 4096:4096
+2015/12/27 20:13:00 [notice] 18040#0: signal 3 (SIGQUIT) received, shutting down
+2015/12/27 20:13:00 [info] 18040#0: epoll_wait() failed (4: Interrupted system call)
+2015/12/27 20:13:00 [notice] 18040#0: exit
