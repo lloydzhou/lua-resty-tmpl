@@ -3,9 +3,6 @@
 local _M = { _VERSION = '0.1'  }
 local mt = {__index = _M}
 
--- cache the compile template to function array
-local _FN = {}
-
 function _M.new(callback, minify, tags)
     tags = ("table" == type(tags) and 4 == #tags) and tags or {"{{", "}}", "{%%", "%%}"}
     return setmetatable({
@@ -21,7 +18,8 @@ function _M.new(callback, minify, tags)
             [tags[2]] = ")_[=[",
             [tags[3]] = "]=]  ",
             [tags[4]] = " _[=["
-        }
+        },
+        cache = {}
     }, mt)
 end
 
@@ -34,8 +32,8 @@ function _M.parse(self, tmpl, minify)
 end
 
 function _M.compile(self, tmpl, minify)
-    _FN[tmpl] = _FN[tmpl] or loadstring(_M.parse(self, tmpl, minify))()
-    return _FN[tmpl]
+    self.cache[tmpl] = self.cache[tmpl] or loadstring(_M.parse(self, tmpl, minify))()
+    return self.cache[tmpl]
 end
 
 -- can render compiled function or template string
