@@ -11,6 +11,7 @@ local tmpl = [[
         <p>{{message}}</p>
     {% end %}
 {% end %}
+{% local testvar = 'set val in template'%}{{ testvar }}
 ]]
 print (t:parse(tmpl))
 --print (t:compile(tmpl))
