@@ -1,7 +1,7 @@
 local template = require "lib.resty.template"
 
 local t = template.new()
-local t = template.new(io.write, true, {"{{", "}}", "{%%", "%%}"})
+--local t = template.new(io.write, true, {"{{", "}}", "{%%", "%%}"})
 
 local tmpl = [[
 <h1>{{title}}</h1>
@@ -13,10 +13,12 @@ local tmpl = [[
 {% end %}
 {% local testvar = 'set val in template'%}{{ testvar }}
 ]]
-print (t:parse(tmpl))
+--print (t:parse(tmpl))
 --print (t:compile(tmpl))
 
 local data = {title = 'Title', subtitle = 'Sub Title', messages = {'test message 1', 'test message 2'}}
+
 t:render(tmpl, data)
-t:render(t:compile(tmpl), data)
+
+--t:render(t:compile(tmpl), data)
 
