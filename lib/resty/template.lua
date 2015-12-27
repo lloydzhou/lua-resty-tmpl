@@ -13,9 +13,10 @@ function _M.new(callback, minify, tags)
         minify = minify or false,
         replace_templae = {
             ["\\"] = "\\\\",
-            ["\n"] = "\\n",
-            ["\r"] = "\\r",
+            --["\n"] = "\\n",
+            --["\r"] = "\\r",
             ["'"] = "\'",
+            ['"'] = "\"",
             [tags[1]] = "]=]_(",
             [tags[2]] = ")_[=[",
             [tags[3]] = "]=]  ",
