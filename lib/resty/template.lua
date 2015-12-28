@@ -24,6 +24,7 @@ function _M.new(callback, minify, tags)
 end
 
 function _M.parse(self, tmpl, minify)
+    -- see https://github.com/dannote/lua-template
     for k, v in pairs(self.replace_templae) do
         tmpl = tmpl:gsub(k, v)
     end
