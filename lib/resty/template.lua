@@ -45,5 +45,7 @@ function _M.render(self, tmpl, data, callback, minify)
     return compile(callback or self.callback)
 end
 
+setmetatable(_M, {__call = function(self, ...) return _M.render(_M.new(), ...) end})
+
 return _M
 

@@ -22,3 +22,5 @@ t:render(tmpl, data)
 
 --t:render(t:compile(tmpl), data)
 
+template(tmpl, data)
+
