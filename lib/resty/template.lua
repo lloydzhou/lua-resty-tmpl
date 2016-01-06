@@ -31,9 +31,9 @@ function _M.parse(self, tmpl, minify)
     return minify and str:gsub("%s+", " ") or str
 end
 
-function _M.compile(self, tmpl, minify)
+function _M.compile(self, tmpl, minify, cacheable)
     local key = nil == ngx and tmpl or ngx.md5(tmpl)
-    if self.cacheable then
+    if cacheable or self.cacheable then
         self.cache[key] = self.cache[key] or loadstring(_M.parse(self, tmpl, minify))()
         return self.cache[key]
     end
@@ -41,8 +41,8 @@ function _M.compile(self, tmpl, minify)
 end
 
 -- can render compiled function or template string
-function _M.render(self, tmpl, data, callback, minify)
-    local compile = type(tmpl) == "function" and tmpl or _M.compile(self, tmpl, minify or self.minify)
+function _M.render(self, tmpl, data, callback, minify, cacheable)
+    local compile = type(tmpl) == "function" and tmpl or _M.compile(self, tmpl, minify or self.minify, cacheable or self.cacheable)
     setmetatable(data, {__index = _G})
     setfenv(compile, data)
     return compile(callback or self.callback)

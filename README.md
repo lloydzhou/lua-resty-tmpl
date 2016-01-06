@@ -4,12 +4,13 @@ Simple template engine for lua and openresty
 # Methods
 
 ## new
-`syntax: t = template.new(callback, minify, tags)`
+`syntax: t = template.new(callback, minify, tags, cacheable)`
 
 create new template instance, all params is optional  
 the default value of callback is "io.write" or "ngx.print"  
 the default value of minify is false
 the default value of tags is {"{{", "}}", "{%%", "%%}"}  
+the default value of cacheable is true
 
 ## parse
 `syntax: code = t:parse(tmpl, minify)`
@@ -17,17 +18,17 @@ the default value of tags is {"{{", "}}", "{%%", "%%}"}
 parse the template into lua code.
 
 ## compile
-`syntax: func = t:compile(tmpl, minify)`
+`syntax: func = t:compile(tmpl, minify, cacheable)`
 
 compile the template into lua function, this method will call parse method.  
 this method will auto cache the compiled function.
 
 ## render
-`syntax: t:render(tmpl_or_func, data, callback, minify)`
+`syntax: t:render(tmpl_or_func, data, callback, minify, cacheable)`
 
 render the template with variables stored in data, 
 the first param can be template string or compiled function.  
-the callback and minify params will replace the default value gived from "new" method.
+the callback, minify and cacheable params will replace the default value gived from "new" method.
 
 
 # Template Syntax
