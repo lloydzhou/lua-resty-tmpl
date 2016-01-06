@@ -3,15 +3,14 @@
 local _M = { _VERSION = '0.1'  }
 local mt = {__index = _M}
 
-function _M.new(callback, minify, tags)
+function _M.new(callback, minify, tags, cacheable)
     tags = ("table" == type(tags) and 4 == #tags) and tags or {"{{", "}}", "{%%", "%%}"}
     return setmetatable({
         callback = callback or (nil == ngx and io.write or ngx.print),
         minify = minify or false,
+        cacheable = cacheable or true,
         replace_templae = {
             ["\\"] = "\\\\",
-            --["\n"] = "\\n",
-            --["\r"] = "\\r",
             ["'"] = "\'",
             ['"'] = "\"",
             [tags[1]] = "]=]_(",
@@ -34,8 +33,11 @@ end
 
 function _M.compile(self, tmpl, minify)
     local key = nil == ngx and tmpl or ngx.md5(tmpl)
-    self.cache[tmpl] = self.cache[tmpl] or loadstring(_M.parse(self, tmpl, minify))()
-    return self.cache[tmpl]
+    if self.cacheable then
+        self.cache[key] = self.cache[key] or loadstring(_M.parse(self, tmpl, minify))()
+        return self.cache[key]
+    end
+    return loadstring(_M.parse(self, tmpl, minify))()
 end
 
 -- can render compiled function or template string
