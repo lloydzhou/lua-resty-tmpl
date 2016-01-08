@@ -1,4 +1,4 @@
-# lua-resy-template
+# lua-resy-tmpl
 Simple template engine for lua and openresty
 
 # Methods

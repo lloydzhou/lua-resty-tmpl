@@ -27,7 +27,7 @@ __DATA__
 --- config
     location /t {
         content_by_lua '
-            local template = require "resty.template"
+            local template = require "resty.tmpl"
             local t = template.new(ngx.say, true)
             t:render([[<h1>{{title}}</h1>]], {title = "TITLE"})
         ';

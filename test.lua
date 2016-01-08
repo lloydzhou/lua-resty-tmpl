@@ -1,4 +1,4 @@
-local template = require "lib.resty.template"
+local template = require "lib.resty.tmpl"
 
 local t = template.new()
 --local t = template.new(io.write, true, {"{{", "}}", "{%%", "%%}"})
